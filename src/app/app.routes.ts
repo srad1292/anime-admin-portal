@@ -1,30 +1,19 @@
 import { Routes } from '@angular/router';
 import { NavigationLayoutComponent } from './core/layouts/navigation-layout/navigation-layout.component';
-import { TestComponent1Component } from './test-component1/test-component1.component';
-import { TestComponent2Component } from './test-component2/test-component2.component';
 
 export const appRoutes: Routes = [
     {
-        path: '',
+        path: 'anime',
         component: NavigationLayoutComponent,
-        children: [
-            {
-                path: 'test1',
-                component: TestComponent1Component
-            },
-            {
-                path: 'test2',
-                component: TestComponent2Component
-            },
-            {
-                path: '',
-                pathMatch: 'full',
-                redirectTo: 'test1'
-            },
-        ]
+        loadChildren: () => import('./feature-modules/admin/admin.module').then((m) => m.AdminModule)
+    },
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'anime'
     },
     {
         path: '**',
-        redirectTo: 'test1'
+        redirectTo: 'anime'
     }
 ]
